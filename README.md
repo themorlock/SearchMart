@@ -5,7 +5,7 @@ Contains the webscraper used to scrape data from walmart.com and the scraped dat
 
 To run the web scraper, you need to provide three command-line arguments: the url where it should start scraping, the max number of products it should crawl to, and the name of the department you are scraping.
 
-All required modules are standard except you must install scikit-learn version 0.22.2.post1 (pip install -Iv scikit-learn==0.22.2.post1)
+All required modules must be in their standard versions except you must install scikit-learn version 0.22.2.post1 (pip install -Iv scikit-learn==0.22.2.post1)
 
 To use the server for the backend, run an Apache server with index.html in ServerPython/, and also run the apy.py REST API in RestAPI/.
 
