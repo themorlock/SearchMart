@@ -8,3 +8,5 @@ To run the web scraper, you need to provide three command-line arguments: the ur
 All required modules are standard except you must install scikit-learn version 0.22.2.post1 (pip install -Iv scikit-learn==0.22.2.post1)
 
 To use the server for the backend, run an Apache server with index.html in ServerPython/, and also run the apy.py REST API in RestAPI/.
+
+Link to our machine learning models are [here.](https://drive.google.com/drive/folders/1Hu-wNzY6c8lyhliRmRrNSQZultWkoaM4?usp=sharing) To load them into our server, make sure they are in a folder titled 'MachineLearningModels' that is one directory above the directory the server is in.
