@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SearchMart</title>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="data.js"></script>
+
+	<link	rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"
+	>
+</head>
+<body>
+	<div class="content">
+		<h1>SearchMart</h1>
+		
+		<div class="searchBox">
+			<form onsubmit="getData()">
+				<div class="searchBasic">
+					<input	type="text"
+							id="search"
+							name="search"
+							placeholder="Search Walmart"
+					>
+					<button><i class="fas fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+
+		<div class="searchResults">
+			<div class="resultList">
+				<ol class="orderedList">
+				</ol>
+			</div>
+			<iframe src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg"></iframe>
+		</div>
+	</div>
+
+
+<!-- script -->
+	<script type="text/javascript">
+		function getData() {
+			event.preventDefault();
+			var searchData = $("input").val();
+			searchData = searchData.replaceAll(" ", "+");
+			$("ol").empty();
+			var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+
+		        if (this.readyState == 4 && this.status == 200) {
+		            var result = this.responseText;
+		            result = result.substring(1, result.length - 2);
+		            console.log(result);
+		            var resultItems = result.split("\",");
+		            var resultItemLink = resultItems[0].split(",")[2];
+		            $("iframe").attr("src", resultItemLink);
+		            
+		            for(var i = 0; i < resultItems.length; i++) {
+		            	var resultItem = resultItems[i].split(",")[1];
+		            	console.log(resultItemLink);
+		            	resultItem = resultItem.replaceAll("-", " ");
+		            	$(".orderedList").append("<li>" + resultItem + "</li>");
+		            }
+		       }
+		    };
+		    xhttp.open("GET", "http://127.0.0.1:5000/?query=" + searchData, true);
+		    xhttp.send();
+
+			// let response = await fetch("http://127.0.0.1:5000/?query=a+b");
+			// console.log(response.json);
+
+			// if (response.ok) { // if HTTP-status is 200-299
+			//   // get the response body (the method explained below)
+			//   let json = await response.json();
+			//   print(json);
+			// } else {
+			//   alert("HTTP-Error: " + response.status);
+			// }
+
+			// $.ajax({
+			// 	method: 'GET',
+			// 	url: 'processData.php',
+			// 	data: { search: searchData },
+			// 	success: function(returnData) {
+			// 		console.log(returnData);
+			// 		alert(returnData);
+			// 	}
+			// });
+		}
+	</script>
+<!-- script -->
+
+
+<!-- style -->
+	<style>
+		body {
+			width: 100%;
+
+			display: flex;
+			justify-content: center;
+
+			padding: 20px;
+
+			background-color: rgb(4, 30, 66);
+		}
+
+		.content {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		h1 {
+			font-size: 200%;
+			color: white;
+			font-style: sans-serif;
+		}
+
+		.searchBox {
+			width: 100%;
+			margin: 10px;
+		}
+
+		.searchBasic {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		input {
+			width:40%;
+			padding: 10px;
+  			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+			border-radius: 5px;
+		}
+
+		button {
+			height: 40px;
+			background-color: rgb(255, 194, 32);
+			opacity: 1;
+			border: 0px;
+			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+			border-radius: 5px;
+			margin: 3px;
+		}
+
+		button:hover {
+			background-color: rgb(240, 180, 15);
+			box-shadow: 15px 15px 0px 0px rgba(0,0,0,0.06);
+			border-radius: 6px;
+		}
+
+		button:active {
+			background-color: rgb(220, 160, 20);
+			box-shadow: 15px 15px 0px 0px rgba(0,0,0,0.06);
+			border-radius: 4px;
+		}
+
+		i {
+			color: black;
+		}
+
+		iframe {
+			width: 100%;
+		}
+
+		li {
+			color: white;
+			font-size: 25px;
+			padding: 4px;
+		}
+	</style>
+<!-- style -- >	
+</body>
+</html>
